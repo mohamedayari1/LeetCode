@@ -1,7 +1,6 @@
 class TrieNode:
     def __init__(self):
         self.children = {}
-        self.is_end_of_word = False
 
 class Trie:
 
@@ -25,9 +24,7 @@ class Trie:
                 new_node = TrieNode()
                 current_node.children[c] = new_node
                 current_node = new_node
-        
-        # End of the word
-        current_node.is_end_of_word = True
+
 
     def search(self, word: str) -> bool:
         return word in self.seen
