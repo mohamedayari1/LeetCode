@@ -1,22 +1,19 @@
 class Solution:
+    def helper(self, i, nums, subsets, cur_set):
+         
+        if i >= len(nums):
+            subsets.append(cur_set.copy())
+            return 
+        
+        cur_set.append(nums[i])
+        self.helper(i+1, nums, subsets, cur_set)
+
+        cur_set.pop()
+        self.helper(i+1, nums, subsets, cur_set)
+
+
+    
     def subsets(self, nums: List[int]) -> List[List[int]]:
-        result = []
-
-        subset = []
-
-        def dfs(i):
-            if i >= len(nums):
-                result.append(subset.copy())
-                return 
-
-            # Choice of adding the next element
-            subset.append(nums[i])
-            dfs(i+1)
-            
-
-            # Choice of not adding the next element
-            subset.pop()
-            dfs(i+1)
-
-        dfs(0)
-        return result
+        subsets, cur_set = [], []
+        self.helper(0, nums, subsets, cur_set)
+        return subsets
