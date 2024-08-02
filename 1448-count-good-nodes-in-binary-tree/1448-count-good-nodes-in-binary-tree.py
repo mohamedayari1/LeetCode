@@ -6,20 +6,22 @@
 #         self.right = right
 class Solution:
     def goodNodes(self, root: TreeNode) -> int:
+
+        if not root:
+            return
+
         self.result = 0
-        
-        
-        def preorder_dfs(node, max_value):
+
+        def dfs(node, max_value): 
             if not node:
                 return 0
-            
-            #Implementing preorder dfs
             self.result = 1 if node.val >= max_value else 0
             max_value = max(max_value, node.val)
-            
-            self.result += preorder_dfs(node.left, max_value) + preorder_dfs(node.right, max_value)
-            
-            return self.result 
+            self.result += dfs(node.left, max_value) + dfs(node.right, max_value)            
+            return self.result
 
-        self.result = preorder_dfs(root, root.val)
+            
+
+                
+        self.result = dfs(root, root.val)
         return self.result
