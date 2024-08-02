@@ -7,19 +7,16 @@
 class Solution:
     def rightSideView(self, root: Optional[TreeNode]) -> List[int]:
         if not root:
-            return 
-        # Implementing BFS
+            return
         queue = collections.deque([root])
-        right_view = []
-        while queue:
-            level_length = len(queue)
-            for i in range(level_length): #taking a screenshot
-                current_node = queue.popleft()
-                if i == level_length - 1:
-                    right_view.append(current_node.val)
+        result = []
 
-                if current_node.left:
-                    queue.append(current_node.left)
-                if current_node.right:
-                    queue.append(current_node.right)
-        return right_view
+        while queue:
+            for i in range(len(queue)):
+                curr_node = queue.popleft()
+                if curr_node.left:
+                    queue.append(curr_node.left)
+                if curr_node.right:
+                    queue.append(curr_node.right)
+            result.append(curr_node.val)
+        return result
